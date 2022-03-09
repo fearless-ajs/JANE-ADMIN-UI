@@ -24,6 +24,8 @@
   <link href="%PUBLIC_URL%/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
   <!-- App Css-->
   <link href="%PUBLIC_URL%/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <!--
     Notice the use of %PUBLIC_URL% in the tags above.
     It will be replaced with the URL of the `public` folder during the build.
@@ -35,7 +37,7 @@
   -->
   <title>Jane Admin</title>
 </head>
-<body data-layout="horizontal" data-topbar="dark">
+<body data-layout="horizontal" data-layout-mode="dark" data-topbar="dark">
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
 
@@ -45,8 +47,16 @@
 <script src="%PUBLIC_URL%/assets/libs/simplebar/simplebar.min.js"></script>
 <script src="%PUBLIC_URL%/assets/libs/feather-icons/feather.min.js"></script>
 
+
+<!-- apexcharts -->
+<script src="%PUBLIC_URL%/assets/libs/apexcharts/apexcharts.min.js"></script>
+<!-- Chart JS -->
+<script src="%PUBLIC_URL%/assets/js/pages/chartjs.js"></script>
+
+
 <script src="%PUBLIC_URL%/assets/js/pages/dashboard.init.js"></script>
 
 <script src="%PUBLIC_URL%/assets/js/app.js"></script>
+
 </body>
 </html>

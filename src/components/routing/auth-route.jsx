@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
-import {selectLastAttemptedRoute} from "../../../redux/routing/routing.selectors";
-import {setLastAttemptedRoute} from "../../../redux/routing/routing.actions";
-import TrustServiceProvider from "../../providers/TrustServiceProvider";
+import {selectLastAttemptedRoute} from "../../redux/routing/routing.selectors";
+import {setLastAttemptedRoute} from "../../redux/routing/routing.actions";
+import TrustServiceProvider from "../providers/TrustServiceProvider";
 
 const AuthRoute = ({ currentUser,lastAttemptedRoute, setLastAttemptedRoute, match, location, component: Component, ...rest }) => {
     //Set the attempted route, i.e the route the user is trying to access

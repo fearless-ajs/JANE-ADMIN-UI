@@ -15,7 +15,7 @@ import Auth from "../../models/Auth";
 // SweetAlert
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-const notify = withReactContent(Swal);
+import TrustServiceProvider from "../../components/providers/TrustServiceProvider";
 
 
 /** ------------------------------------------------------------------- **/
@@ -26,31 +26,34 @@ export function* isUserAuthenticated() {
     try {
         // Check User Authentication status
         const userAuth =  yield Auth.isUserLoggedIn();
-        yield put(signInSuccess(userAuth.data));
-        // Alert the user of the authentication
-        Notify.success("Session restored.")
-        // Redirects to the your last route if it is defined
-
+        if (!TrustServiceProvider.hasRole(userAuth.data, 'administrator')
+            && !TrustServiceProvider.hasRole(userAuth.data, 'super-administrator')){
+            Notify.warn('Access denied!')
+            yield put(signInFailure(`You are not authorized to access this resource`,))
+        }else {
+            yield put(signInSuccess(userAuth.data));
+            Notify.success("Session restored")
+        }
     }catch (error) {
         yield put(userSessionFailure(error.response));
-        Notify.error("Fail to restore session ")
     }
 }
 
 export function* signIn({payload: { email, password }}) {
     try{
         const userAuth = yield Auth.authenticateUser(email, password);
-        yield put(signInSuccess(userAuth.data));
-        yield Notify.success("Logged in successfully");
-        history.push('/admin')
+        if (!TrustServiceProvider.hasRole(userAuth.data, 'administrator')
+            && !TrustServiceProvider.hasRole(userAuth.data, 'super-administrator')){
+            Notify.warn('Access denied!')
+            // Set loading to false
+            yield put(signInFailure(`You are not authorized to access this resource`,))
+        }else {
+            yield put(signInSuccess(userAuth.data));
+            yield Notify.success("Logged in successfully");
+            history.push('/')
+        }
     }catch(error) {
-        const { err, message } = error.response.data;
-        Swal.fire({
-            icon: 'error',
-            title: 'Authentication Error',
-            text: message,
-            showConfirmButton: true,
-        });
+        Notify.error('Invalid username or password')
         yield put(signInFailure(error.response))
     }
 }
@@ -60,7 +63,7 @@ export function* signOut() {
        yield Auth.logout();
        yield put(signOutSuccess());
        yield Notify.success("Logged out successfully");
-       history.push('/admin/sign-in');
+       history.push('/sign-in');
    }catch (error) {
        yield put(signOutFailure(error.response))
        yield Notify.error("Logout error");

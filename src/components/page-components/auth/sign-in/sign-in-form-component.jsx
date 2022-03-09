@@ -1,12 +1,14 @@
 import React, {useState} from "react";
-import {signInStart} from "../../../redux/user/user.actions";
+import { Link } from "react-router-dom";
+import {signInStart} from "../../../../redux/user/user.actions";
 import {createStructuredSelector} from "reselect";
 import {
     selectCurrentUserLoadingStatus,
     selectCurrentUserLoginError,
-} from "../../../redux/user/user.selectors";
+} from "../../../../redux/user/user.selectors";
 import {connect} from "react-redux";
-import ButtonSpinner from "../../spinners/button-spinner.component";
+import ButtonSpinner from "../../../spinners/button-spinner.component";
+
 const SignInFormComponent = ({ signInStart, isLoading }) => {
     const [userCredentials, setUserCredentials] = useState({
         email: '',
@@ -14,17 +16,16 @@ const SignInFormComponent = ({ signInStart, isLoading }) => {
     });
     const { email, password } = userCredentials;
 
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         signInStart(email, password);
     }
 
-
     const handleChange = event => {
         const { value, name } = event.target;
         setUserCredentials({...userCredentials, [name]: value });
     };
+
     return  (
         <form onSubmit={handleSubmit}>
 
@@ -43,6 +44,9 @@ const SignInFormComponent = ({ signInStart, isLoading }) => {
             </div>
 
             <div className="mb-3">
+                <div className="float-end">
+                    <Link to={'/forgot-password'} className="text-muted">Forgot password?</Link>
+                </div>
                 <label className="form-label" htmlFor="userpassword">Password</label>
                 <input
                     type="password"
@@ -67,6 +71,10 @@ const SignInFormComponent = ({ signInStart, isLoading }) => {
                         type="submit">  {isLoading?(<ButtonSpinner />): 'Log In'}
                 </button>
             </div>
+            <div className="mt-4 text-center">
+                <p className="mb-0">Need a classy dress ? <a href="#"
+                                                               className="fw-medium text-primary"> Shop now </a></p>
+            </div>
         </form>
     );
 }
@@ -77,6 +85,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = createStructuredSelector({
+
+
     loginError: selectCurrentUserLoginError,
     isLoading: selectCurrentUserLoadingStatus
 });

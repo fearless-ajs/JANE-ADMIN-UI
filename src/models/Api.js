@@ -16,8 +16,8 @@ class Api{
         return `${this.serverLink}/uploads/images/users/${filename}`
     }
 
-    postsMediaPath = (filename) => {
-        return `${this.serverLink}/uploads/images/posts/${filename}`
+    adminUiImagePath = (filename) => {
+        return `${this.serverLink}/uploads/images/admin-ui/${filename}`
     }
 
     systemImagePath = (filename) => {

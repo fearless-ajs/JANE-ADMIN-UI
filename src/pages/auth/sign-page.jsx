@@ -1,5 +1,6 @@
 import React from "react";
-import SignInFormComponent from "../../components/auth/sign-in/sign-in-form-component";
+import SignInFormComponent from "../../components/page-components/auth/sign-in/sign-in-form-component";
+import AuthFooterComponent from "../../components/layouts/auth-footer-component";
 
 const SignInPage = () => {
     return  (
@@ -14,7 +15,7 @@ const SignInPage = () => {
                               <div className="text-center mb-4">
                                   <a href="index.html">
                                       <img src="assets/images/logo-sm.svg" alt="" height="22" /> <span
-                                          className="logo-txt">21-Day Challenge</span>
+                                          className="logo-txt">Jane Admin</span>
                                   </a>
                               </div>
 
@@ -37,16 +38,7 @@ const SignInPage = () => {
 
                       </div>
 
-                      <div className="row">
-                          <div className="col-lg-12">
-                              <div className="text-center text-muted p-4">
-                                  <p className="text-white-50">© <script>document.write(new
-                                      Date().getFullYear())</script> 21 days challenge <i
-                                      className="mdi mdi-heart text-danger"></i> by Loveworld
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
+                      <AuthFooterComponent />
 
                   </div>
               </div>

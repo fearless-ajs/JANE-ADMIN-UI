@@ -24,7 +24,6 @@ class Auth extends Api{
         },{ withCredentials: true });
     }
 
-
     verifyAccount = async token => {
         return await axios.get(`${this.endPoint()}/auth/verify-user/v-token/${token}`,{ withCredentials: true });
     }

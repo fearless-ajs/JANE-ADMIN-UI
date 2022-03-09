@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
-import {selectLastAttemptedRoute} from "../../../redux/routing/routing.selectors";
+import {selectLastAttemptedRoute} from "../../redux/routing/routing.selectors";
 
 const GuestRoute = ({ currentUser, component: Component, lastAttemptedRoute, history, ...rest }) => {
 
